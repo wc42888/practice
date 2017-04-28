@@ -1,0 +1,49 @@
+
+/**
+ * Definition of TreeNode:
+ * class TreeNode {
+ * public:
+ *     int val;
+ *     TreeNode *left, *right;
+ *     TreeNode(int val) {
+ *         this->val = val;
+ *         this->left = this->right = NULL;
+ *     }
+ * }
+ */
+
+class Solution {
+public:
+    /**
+     * @param root: The root of binary tree.
+     * @return: Preorder in vector which contains node values.
+     */
+     
+    vector<int> preorderTraversal(TreeNode *root) {
+        // write your code here
+        
+        vector<int> results;
+        
+        results = traversal(root, results);
+        
+        return results;
+    }
+    
+    vector<int> traversal(TreeNode *current, vector<int> cur_result){
+        
+        if(!current){
+            return vector<int>();
+        }
+        
+        vector<int> left = traversal(current->left, cur_result);
+        vector<int> right = traversal(current->right, cur_result);
+        
+        cur_result.push_back(current->val);
+        cur_result.insert(cur_result.end(), left.begin(), left.end());
+        cur_result.insert(cur_result.end(), right.begin(), right.end());
+        
+        return cur_result;
+    }
+    
+};
+

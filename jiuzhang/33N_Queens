@@ -1,0 +1,72 @@
+class Solution {
+public:
+    /**
+     * Get all distinct N-Queen solutions
+     * @param n: The number of queens
+     * @return: All distinct solutions
+     * For example, A string '...Q' shows a queen on forth position
+     */
+    vector<vector<string> > solveNQueens(int n) {
+        // write your code here
+        
+        vector<vector<string>> results;
+        
+        if(n==0){
+            results.push_back(vector<string>());
+            return results;
+        }
+        
+        vector<int> cols;
+        
+        helper(n, cols, results);
+
+        return results;
+    }
+    
+    void helper (int n, vector<int> cols, vector<vector<string>>& results){
+        
+        if(cols.size()==n){
+            results.push_back(drawQueens(cols,n));
+            return ;
+        }
+        
+        for(int i =0; i<n; ++i){
+            if(!isValid(cols, i)){
+                continue;
+            }
+            cols.push_back(i);
+            helper(n, cols, results);
+            cols.pop_back();
+        }
+    } 
+    
+    bool isValid(vector<int> cols, int col){
+        int row = cols.size();
+        for(int i = 0; i<row; ++i){
+            if(cols[i]==col){
+                return false;
+            }
+            if(i-cols[i] == row - col){
+                return false;
+            }
+            if(i+cols[i] == row + col){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    vector<string> drawQueens(vector<int> cols, int n){
+        vector<string> results;
+        
+        for(int i = 0; i<cols.size(); ++i){
+            string temp(n,'.');
+            temp[cols[i]]='Q';
+            results.push_back(temp);
+        }
+        
+        return results;
+    }
+}; 
+

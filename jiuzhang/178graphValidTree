@@ -1,0 +1,53 @@
+class Solution {
+public:
+    /**
+     * @param n an integer
+     * @param edges a list of undirected edges
+     * @return true if it's a valid tree, or false
+     */
+    bool validTree(int n, vector<vector<int>>& edges) {
+        // Write your code here
+        int numEdges = edges.size();
+        
+        if(numEdges!=n-1){
+            return false;
+        }
+        
+        map<int, set<int>> graph = buildGraph(edges);
+        
+        queue<int> unvisited;
+        set<int> visited;
+        
+        unvisited.push(graph.begin()->first);
+        visited.insert(graph.begin()->first);
+        
+        while(!unvisited.empty()){
+            int cur = unvisited.front();
+            unvisited.pop();
+            //int size = graph[cur].size();
+            for(set<int>::iterator it = graph[cur].begin(); it!=graph[cur].end(); ++it){
+                if(visited.count(*it)){
+                    continue;
+                }
+                unvisited.push(*it);
+                visited.insert(*it);
+            }
+        }
+        
+        return (visited.size()==n);
+    }
+    
+    map<int, set<int>> buildGraph(vector<vector<int>>& edges){
+        map<int, set<int>> graph;
+        
+        for(int i=0; i<edges.size(); ++i){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            
+            graph[u].insert(v);
+            graph[v].insert(u);
+        }
+        
+        return graph;
+    }
+};

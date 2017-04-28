@@ -1,0 +1,107 @@
+/**
+ * Definition of TreeNode:
+ * class TreeNode {
+ * public:
+ *     int val;
+ *     TreeNode *left, *right;
+ *     TreeNode(int val) {
+ *         this->val = val;
+ *         this->left = this->right = NULL;
+ *     }
+ * }
+ */
+class Solution {
+public:
+    /**
+     * @param root the root of the binary tree
+     * @return all root-to-leaf paths
+     */
+    vector<string> binaryTreePaths(TreeNode* root) {
+        // Write your code here
+        
+        vector<string> answers;
+        
+        answers = findString(root);
+        
+        return answers;
+    }
+    
+    vector<string> findString(TreeNode *current){
+        
+        if(!current){
+            return vector<string>();
+        }
+        
+        if(!current->left && !current->right){
+            vector<string> leaf;
+            leaf.push_back(to_string(current->val));
+            return leaf;
+        }
+        
+        vector<string> results;
+
+        vector<string> left = findString(current->left);
+        vector<string> right = findString(current->right);
+        
+        for(int i = 0; i<left.size();++i){
+            results.push_back(to_string(current->val) + "->" + left[i]);
+        }
+        
+        for(int i = 0; i<right.size(); ++i){
+           results.push_back(to_string(current->val) + "->" + right[i]);
+        }
+        
+        return results;
+    }
+};
+
+
+
+/**
+ * Definition of TreeNode:
+ * class TreeNode {
+ * public:
+ *     int val;
+ *     TreeNode *left, *right;
+ *     TreeNode(int val) {
+ *         this->val = val;
+ *         this->left = this->right = NULL;
+ *     }
+ * }
+ */
+class Solution {
+public:
+    /**
+     * @param root the root of the binary tree
+     * @return all root-to-leaf paths
+     */
+    vector<string> binaryTreePaths(TreeNode* root) {
+        // Write your code here
+        
+        if(!root){
+            return vector<string>();
+        }
+        
+        if(!root->left && !root->right){
+            vector<string> leaf;
+            leaf.push_back(to_string(root->val));
+            return leaf;
+        }
+        
+        vector<string> results;
+
+        vector<string> left = binaryTreePaths(root->left);
+        vector<string> right = binaryTreePaths(root->right);
+        
+        for(int i = 0; i<left.size();++i){
+            results.push_back(to_string(root->val) + "->" + left[i]);
+        }
+        
+        for(int i = 0; i<right.size(); ++i){
+           results.push_back(to_string(root->val) + "->" + right[i]);
+        }
+        
+        return results;
+    }
+    
+};

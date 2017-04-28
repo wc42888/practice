@@ -1,0 +1,63 @@
+class Solution {
+public:
+    /**
+     * @param grid a boolean 2D matrix
+     * @return an integer
+     */
+    int numIslands(vector<vector<bool>>& grid) {
+        // Write your code here
+
+       int result = 0;
+
+        for(int row = 0; row<grid.size(); ++row){
+            for(int col = 0; col<grid[row].size(); ++col){
+                if(grid[row][col]){
+                        //cout<<row<<","<<col<<endl;;
+                    ++result;
+                    updateGrid(grid, row, col);
+                }
+            }
+        }
+
+     
+        return result;   
+    }
+    
+    void updateGrid(vector<vector<bool>>& grid, int row, int col){
+        vector<int> dx = {1,0,0,-1};
+        vector<int> dy = {0,1,-1,0};
+        
+        queue<vector<int>> connected;
+        connected.push(vector<int>{row,col});
+        
+        while(!connected.empty()){
+            vector<int> cor = connected.front();
+            connected.pop();
+            grid[cor[0]][cor[1]] = false;
+            
+            for(int i = 0; i<4; ++i){
+                int x = cor[0]+ dx[i];
+                int y = cor[1]+ dy[i];
+                
+                if(isValid(x,y,grid)){
+                    if(grid[x][y]){
+                        connected.push(vector<int>{x,y});
+                    }
+                }
+            }
+            
+        }
+        
+    }
+    
+    bool isValid(int row,int col,vector<vector<bool>> &grid){
+        if(row>=grid.size()){
+            return false;
+        }
+        if(col>=grid[0].size()){
+            return false;
+        }
+        
+        return true;
+    }
+};

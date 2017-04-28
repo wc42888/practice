@@ -1,0 +1,66 @@
+/**
+ * Definition for undirected graph.
+ * struct UndirectedGraphNode {
+ *     int label;
+ *     vector<UndirectedGraphNode *> neighbors;
+ *     UndirectedGraphNode(int x) : label(x) {};
+ * };
+ */
+class Solution {
+public:
+    /**
+     * @param node: A undirected graph node
+     * @return: A undirected graph node
+     */
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        // write your code here
+        if (!node){
+            return NULL;
+        }
+        
+        vector<UndirectedGraphNode* > originalNodes = findNodes(node);
+        map<UndirectedGraphNode*, UndirectedGraphNode*> oldToNew;
+        
+        for(int i = 0; i<originalNodes.size(); ++i){
+            //cout<<originalNodes[i]->label<<endl;
+            UndirectedGraphNode* cur = originalNodes[i];
+            oldToNew[cur] = new UndirectedGraphNode (cur->label);
+        }
+        
+        for(int i = 0; i<originalNodes.size(); ++i){
+            UndirectedGraphNode* curNode = originalNodes[i];
+            
+            for(int j=0; j<(curNode->neighbors).size();++j){
+                UndirectedGraphNode* curNeighbor = (curNode->neighbors)[j];
+                (oldToNew[curNode]->neighbors).push_back(oldToNew[curNeighbor]);
+            }
+        }
+        
+        return oldToNew[node];
+        
+    }
+    
+    vector<UndirectedGraphNode*> findNodes(UndirectedGraphNode *node){
+    
+        queue<UndirectedGraphNode*> unvisited;
+        set<UndirectedGraphNode*> visited;
+        
+        unvisited.push(node);
+        
+        while(!unvisited.empty()){
+            UndirectedGraphNode* cur = unvisited.front();
+            unvisited.pop();
+            visited.insert(cur);
+            
+            int numNeighbors = (cur->neighbors).size();
+            for(int i = 0; i<numNeighbors; ++i){
+                UndirectedGraphNode* neighbor = (cur->neighbors)[i];
+                if(visited.count(neighbor)==0){
+                    unvisited.push(neighbor);
+                }
+            }
+        }
+        
+        return vector<UndirectedGraphNode*>(visited.begin(), visited.end());
+    }
+};

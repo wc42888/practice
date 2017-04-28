@@ -1,0 +1,83 @@
+class Solution {
+public:
+    /**
+     * @param candidates: A list of integers
+     * @param target:An integer
+     * @return: A list of lists of integers
+     */
+    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        // write your code here
+        vector<vector<int>> results;
+        
+        vector<int> nums=removeDup(candidates);
+        
+        vector<int> combination;
+        int startIndex = 0;
+        
+        /*
+        for(int i = 0; i< nums.size(); ++i){
+            cout<< nums[i]<<" ";
+        }*/
+        
+        helper(nums, startIndex, combination, results, target);
+        
+        return results;
+    }
+    /*
+    vector<int> removeDup(vector<int> &candidates){
+        set<int> nums;
+        
+        for(int i = 0; i<candidates.size(); ++i){
+            nums.insert(candidates[i]);
+        }
+        
+        vector<int> newNums;
+        
+        for(set<int>::iterator it = nums.begin(); it!=nums.end(); ++it){
+            newNums.push_back(*it);
+        }
+        
+        return newNums;
+    }
+    */
+    
+    vector<int> removeDup(vector<int> &candidates){
+        int index = 0;
+        sort(candidates.begin(), candidates.end());
+
+        
+        for(int i = 0; i<candidates.size(); ++i){
+            if(candidates[i]!=candidates[index]){
+                candidates[++index] = candidates[i];
+            }
+        }
+        
+        vector<int> nums;
+        
+        for(int i = 0; i<index+1; ++i){
+            nums.push_back(candidates[i]);
+        }
+        
+        
+        return nums;
+    }
+    
+    void helper(vector<int> nums, int startIndex, vector<int>& combination, vector<vector<int>>& results, int target){
+        
+
+        
+        if(target==0){
+         //   combination.push_back(nums[startIndex]);
+            results.push_back(combination);
+        }
+        
+        for(int i = startIndex; i<nums.size(); ++i){
+            if(nums[i]>target){
+                break;
+            }
+            combination.push_back(nums[i]);
+            helper(nums, i , combination, results, target-nums[i]);
+            combination.pop_back();
+        }
+    }
+};

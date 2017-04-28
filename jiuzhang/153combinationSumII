@@ -1,0 +1,46 @@
+class Solution {
+public:
+    /**
+     * @param candidates: A list of integers
+     * @param target:An integer
+     * @return: A list of lists of integers
+     */
+    vector<vector<int> > combinationSum2(vector<int> &candidates, int target) {
+        // write your code here
+        vector<vector<int>> results;
+        
+        sort(candidates.begin(), candidates.end());
+        
+        vector<int> combination;
+        int startIndex = 0;
+        
+        /*
+        for(int i = 0; i< nums.size(); ++i){
+            cout<< nums[i]<<" ";
+        }*/
+        
+        helper(candidates, startIndex, combination, results, target);
+        
+        return results;
+    }
+
+    
+    void helper(vector<int> nums, int startIndex, vector<int>& combination, vector<vector<int>>& results, int target){
+        
+        if(target==0){
+            results.push_back(combination);
+        }
+        
+        for(int i = startIndex; i<nums.size(); ++i){
+            if(nums[i]>target){
+                break;
+            }
+            if(i!=startIndex && nums[i]==nums[i-1]){
+                continue;
+            }
+            combination.push_back(nums[i]);
+            helper(nums, i+1 , combination, results, target-nums[i]);
+            combination.pop_back();
+        }
+    }
+};

@@ -1,0 +1,53 @@
+class Solution {
+public:
+    /**
+     * @param s: A string
+     * @return: A list of lists of string
+     */
+    vector<vector<string>> partition(string s) {
+        // write your code here
+        
+        if(s.empty()){
+            return vector<vector<string>>();
+        }
+        
+        vector<vector<string>> results;
+        vector<string> palindrome;
+        int startIndex = 0;
+        
+        helper(s, 0, palindrome, results);
+        
+        return results;
+    }
+    
+    void helper(string s, int startIndex, vector<string>& palindrome, vector<vector<string>>& results){
+        
+        if(startIndex == s.size()){
+           // cout<<"i am in here"<<endl;
+            results.push_back(palindrome);
+        }
+        
+        for(int i = startIndex; i<s.size(); ++i){
+            if(isPalindrome(s.substr(startIndex, i-startIndex + 1))){
+                palindrome.push_back(s.substr(startIndex, i-startIndex+1));
+                helper(s, i+1, palindrome, results);
+                palindrome.pop_back();
+            }
+        }
+    }
+    
+    bool isPalindrome(string s){
+        int start = 0;
+        int end = s.size()-1;
+        
+        while(start<end){
+            if(s[start]!=s[end]){
+                return false;
+            }
+            ++start;
+            --end;
+        }
+        
+        return true;
+    }
+};

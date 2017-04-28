@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Forms</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body onload="document.signup.userId.focus()">
+    <div id="regForm" class="container">
+    <h1>
+      Sign Up!
+    </h1>
+    <form id="userForm" name="signup" onsubmit="return validateForms()">
+      <ul>
+        <div id="input">
+        <li>
+          <label for="userId">User id:*</label>
+        </li>
+        <li>
+          <input type="text" name="userId" placeholder="User id"/>
+        </li>
+        <li>
+          <label for="passwordId">Password:*</label>
+        </li>
+        <li>
+          <input type="password" name="passwordId" placeholder="Password" />
+        </li>
+        <li>
+          <li>
+          <label for="username">Username:* </label>
+        </li>
+        <li>
+          <input type="text" name="username" placeholder="Username" />
+        </li>
+        <li>
+          <label for="address">Address:</label>
+        </li>
+        <li>
+          <input type="text" name="address" placeholder="Address"/>
+        </li>
+        <li>
+          <label for="zip">ZIP Code:</label>
+        </li>
+        <li>
+          <input type="text" name="zip" placeholder="ZIP Code"/>
+        </li>
+        <li>
+          <label for="email">Email:*</label>
+        </li>
+        <li>
+          <input type="text" name="email" placeholder="Email"/>
+        </li>
+      </div>
+        <li>
+          <label id="gender">Gender:</label>
+        </li>
+        <li>
+          <input type="radio" name="mgender" value="Male" /><span>Male</span>
+        </li>
+        <li>
+          <input type="radio" name="fgender" value="Female" /><span>Female</span>
+        </li>
+        <li>
+          <input type="submit" name="submit" value="Submit" />
+        </li>
+      </ul>
+    </form>
+  </div>
+    <script src="form1.js"></script>
+  </body>
+</html>

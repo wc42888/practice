@@ -1,0 +1,38 @@
+class Solution {
+public:
+    /**
+     * @param S: A set of numbers.
+     * @return: A list of lists. All valid subsets.
+     */
+    vector<vector<int> > subsets(vector<int> &nums) {
+    	// write your code here
+    	
+    	vector<vector<int>> results;
+    	
+    	if(nums.empty()){
+    	    return results;
+    	}
+    	
+    	int startIndex = 0;
+    	vector<int> subset;
+    	helper(nums, startIndex, subset, results);
+    	
+    	return results;
+    }
+    
+    void helper(vector<int>& nums, int startIndex, vector<int>& subset, vector<vector<int>>& results){
+        
+        if(subset.size() >= nums.size()){
+            results.push_back(subset);
+            return;
+        }
+        
+        results.push_back(subset);
+        
+        for(int i = startIndex; i< nums.size(); ++i){
+            subset.push_back(nums[i]);
+            helper(nums, i+1, subset, results);
+            subset.pop_back();
+        }
+    }
+};

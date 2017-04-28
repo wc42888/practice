@@ -1,0 +1,41 @@
+class Solution {
+public:
+    /**
+     * @param nums: A list of integers.
+     * @return: A list of permutations.
+     */
+    vector<vector<int> > permute(vector<int> nums) {
+        // write your code here
+        
+        vector<vector<int>> results;
+
+        if(nums.empty()){
+            results.push_back(vector<int>());
+            return results;
+        }
+        
+        vector<int> per;
+        int startIndex = 0;
+        
+        helper(nums, per, results);
+        
+        return results;
+    }
+    
+    void helper(vector<int> nums, vector<int>& per, vector<vector<int>>& results){
+        if(per.size()==nums.size()){
+            results.push_back(per);
+            return;
+        }
+        
+        for(int i = 0; i<nums.size(); ++i){
+            if(find(per.begin(), per.end(), nums[i])!=per.end()){
+                continue;
+            }
+            per.push_back(nums[i]);
+            helper(nums, per, results);
+            per.pop_back();
+        }
+    }
+};
+

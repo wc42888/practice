@@ -1,0 +1,51 @@
+class Solution {
+public:
+    /**
+     * @param nums: A list of integers.
+     * @return: A list of unique permutations.
+     */
+    vector<vector<int> > permuteUnique(vector<int> &nums) {
+        // write your code here
+        
+        vector<vector<int>> results;
+        
+        if(nums.empty()){
+            results.push_back(vector<int>());
+            return results;
+        }
+        
+        vector<bool> used(nums.size(), false);
+        
+        vector<int> per;
+        
+        sort(nums.begin(), nums.end());
+        
+        helper(nums, per, results, used);
+        
+        return results;
+    }
+    
+    void helper(vector<int> nums, vector<int>& per, vector<vector<int>>& results, vector<bool>& used){
+
+        if(per.size() == nums.size()){
+            results.push_back(per);
+            return;
+        }
+        
+        for(int i = 0; i<nums.size(); ++i){
+            if(used[i]){
+                continue;
+            }
+            if(i>0 && used[i-1]==false && nums[i]==nums[i-1]){
+                continue;
+            }
+            
+            per.push_back(nums[i]);
+            used[i]=true;
+            helper(nums, per, results, used);
+            per.pop_back();
+            used[i]=false;
+            
+        }
+    }
+};
