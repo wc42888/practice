@@ -1,60 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<head>
+    <title>canvas</title>
 
-        <meta charset="utf-8">
-        <title>Simple Internet Calculator</title>
-        
-        <script type="text/javascript">
-            function calculate(){
-                var p = 0;
-                var n = 0;
-                var r = 0;
-                var SI = 0;
-                
-                p = parseInt(document.getElementById("principal").value);
-                n = parseInt(document.getElementById("years").value);
-                r = parseInt(document.getElementById("rate").value);
-                SI = (p*n*r)/100;
-                
-                document.getElementById("res").innerHTML = SI;
-            }
-        </script>
-    </head>
-    
-    <body>
-        <div class="container">
-            <div class="jumbotron">
-                <h1>Simple Internet Calculator</h1>
-                <p>Now clculating interest is simpler</p>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="row-fluid">
-                <div class="col-md-offset-4 col-md-3">
-                    <div class="form-group">
-                        <label for="number"> Principle Amount:</label>
-                        <input type="text" class="form-control" id="principal" placeholder="enter principal amount">
-                        <br>
-                        <label for="number"> Number of Rears:</label>
-                        <input type="text" class="form-control" id="years" placeholder="enter number of years">
-                        <br>
-                        <label for="number"> Rate of Interest::</label>
-                        <input type="text" class="form-control" id="rate" placeholder="enter rate of interest">
-                        <br>
-                        
-                        <button type="button" class="btn btn-primary" onclick="calculate()"> Calculate</button>
-                        <hr>
-                        
-                        <h1><span class="label label-default" id="res">$</span></h1>
-                    </div> 
-                </div>
-            </div>
-        </div>
-        
-        
-        
-    </body>
+</head>
+
+<body>
+    <canvas id="drawing" width="200" height="200">A drawing od something</canvas>
+    <script type="text/javascript" src="script.js"></script>
+
+</body>
 </html>
