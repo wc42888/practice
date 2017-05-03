@@ -198,7 +198,7 @@ h6{
     padding: 0 0 32px 0;
 }
 
-dl, dt, dd{
+dl, dt, dd, blockquote{
     margin: 0;
     padding: 0;
 }
@@ -223,6 +223,39 @@ dl, dt, dd{
 .def-list-1 a:hover{
     text-decoration: underline;
 }
+
+.banner-box{
+    background: #292929;
+    padding:25px 135px 35px 40px;
+}
+
+.banner-box h3{
+    font-size: 34px;
+    line-height: 40px;
+    padding: 0;
+}
+
+.banner-box h4{
+    font-family: 'open sans'
+    font-size: 26px;
+    padding: 0 0 18px 0;
+    letter-spacing: -1px;
+    font-weight: 300px;
+    margin: 5px 0 0 0 ;
+    font-size: 21px;
+    text-transform: uppercase;
+}
+
+.inside{
+    position: relative;
+    z-index: 2;
+}
+
+.quote{
+    
+}
+
+
 
 a{
     color:#fff;
