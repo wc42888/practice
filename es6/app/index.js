@@ -1,10 +1,23 @@
-let call = () => {
-    let secret = 'ES6 rocks!';
-    let reveal = () =>{
-        console.log(secret);
+const budget = () => {
+    let balance = 0;
+    let changeBal = (val) => {
+        return balance += val;
     }
-    return reveal;
+    const deposit20 = () => changeBal(20);
+    const withdrow20 = () => changeBal(-20);
+    const check = () => balance;
+    
+    return {
+        deposit20: deposit20,
+        check: check,
+        withdrow20: withdrow20
+    }
 }
 
-let unveil = call();
-unveil();
+let wallet = budget();
+console.log(wallet);
+wallet.deposit20();
+wallet.withdrow20();
+wallet.deposit20();
+wallet.deposit20();
+console.log(wallet.check());
